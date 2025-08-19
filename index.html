@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Genera correos temporales seguros y anónimos. Email temporal en español que se autodestruye en 1 minuto. Protege tu privacidad con correo desechable sin registro.">
+    <meta name="keywords" content="correo temporal seguro, email temporal en español, correo desechable, email anónimo, correo temporal sin registro, email desechable, correo temporal 1 minuto, email temporal seguro">
+    <meta name="author" content="Onetimemail">
+    <meta name="robots" content="index, follow">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; connect-src 'self' https://api.mail.tm https://api.web3forms.com; form-action 'self' https://api.web3forms.com; base-uri 'self'; frame-ancestors 'self';">
+    <meta property="og:title" content="Onetimemail - Correo Temporal Seguro">
+    <meta property="og:description" content="Genera correos temporales seguros y anónimos. Email temporal en español que se autodestruye en 1 minuto.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Onetimemail - Correo Temporal Seguro">
+    <meta name="twitter:description" content="Genera correos temporales seguros y anónimos. Email temporal en español que se autodestruye en 1 minuto.">
+    <meta name="theme-color" content="#0f172a">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'><path d='M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z' stroke='%238b5cf6' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' fill='%23a855f7'/><path d='L22 6L12 13L2 6' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <title>Onetimemail - Correo Temporal Seguro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slide-in {
+            animation: slideIn 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .pulse-soft {
+            animation: pulseSoft 4s ease-in-out infinite;
+        }
+        
+        .float-animation {
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .bounce-soft {
+            animation: bounceSoft 3s ease-in-out infinite;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulseSoft {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.9; transform: scale(1.02); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-25px) rotate(2deg); }
+        }
+        
+        @keyframes bounceSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        /* Animación sin rotación para evitar descubiertos en bordes */
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+            background-color: #0f172a; /* fallback y relleno para evitar bordes planos */
+            background-size: 100% 100%; /* evita cortes por escalado del gradiente */
+            background-position: center;  /* evita desplazamientos laterales */
+            background-repeat: no-repeat; /* sin cortes repetidos */
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background: 
+                /* Viñeta simétrica reforzada para unificar y cubrir el borde izquierdo */
+                linear-gradient(90deg, rgba(139, 92, 246, 0.22) 0%, rgba(139, 92, 246, 0.14) 12%, rgba(139, 92, 246, 0.00) 28%, rgba(139, 92, 246, 0.00) 72%, rgba(139, 92, 246, 0.14) 88%, rgba(139, 92, 246, 0.22) 100%),
+                /* Radiales fuera del lienzo para evitar transiciones duras en los bordes */
+                radial-gradient(circle at -20% 50%, rgba(139, 92, 246, 0.30) 0%, rgba(139, 92, 246, 0.00) 56%),
+                radial-gradient(circle at 120% 50%, rgba(139, 92, 246, 0.30) 0%, rgba(139, 92, 246, 0.00) 56%),
+                /* Morado simétrico ampliado dentro del lienzo */
+                radial-gradient(circle at 12% 50%, rgba(139, 92, 246, 0.36) 0%, transparent 88%),
+                radial-gradient(circle at 88% 50%, rgba(139, 92, 246, 0.36) 0%, transparent 88%),
+                /* Rosa en la esquina superior derecha ligeramente visible */
+                radial-gradient(circle at 78% 22%, rgba(255, 119, 198, 0.18) 0%, transparent 62%),
+                /* Azul/cian central muy suave para profundidad */
+                radial-gradient(circle at 42% 42%, rgba(120, 198, 255, 0.10) 0%, transparent 60%);
+            animation: floatY 25s linear infinite;
+            z-index: 1;
+            opacity: 0.36; /* mayor suavidad y cobertura en bordes */
+            pointer-events: none; /* evita capturar eventos y posibles artefactos */
+        }
+        
+        .glass-effect {
+            backdrop-filter: blur(24px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 
+                0 25px 45px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-effect-strong {
+            backdrop-filter: blur(32px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 
+                0 32px 64px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #8b5cf6, #a855f7);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+            box-shadow: 0 4px 14px rgba(139, 92, 246, 0.3);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #a855f7, #8b5cf6);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+            box-shadow: 0 4px 14px rgba(6, 182, 212, 0.3);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #0891b2, #06b6d4);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #10b981, #059669);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(135deg, #059669, #10b981);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.4);
+        }
+        
+        .email-particle {
+            position: absolute;
+            opacity: 0.4;
+            animation: emailFloat 20s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(139, 92, 246, 0.4));
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .email-particle svg {
+            transition: all 0.3s ease;
+        }
+        
+        .email-particle:hover svg {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 20px rgba(139, 92, 246, 0.6));
+        }
+        
+        @keyframes emailFloat {
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            10% { opacity: 0.15; transform: scale(1); }
+            90% { opacity: 0.15; transform: scale(1); }
+            100% { transform: translateY(-100px) rotate(360deg) scale(0.8); opacity: 0; }
+        }
+        
+        .status-indicator {
+            position: relative;
+        }
+        
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -18px;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2.5s infinite;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(16, 185, 129, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+        
+        .modern-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px);
+            transition: all 0.3s ease;
+        }
+        
+        .modern-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Contact select dropdown theme (dark options only) */
+        #contactReason { /* keep original Tailwind look */
+            background-color: transparent;
+            color: inherit;
+        }
+        #contactReason option,
+        #contactReason optgroup {
+            color: #e5e7eb; /* text-white/80 */
+            background-color: rgba(15, 23, 42, 0.98); /* slate-900 ~ site bg */
+        }
+        #contactReason option:checked,
+        #contactReason option:hover,
+        #contactReason option:focus {
+            background-color: rgba(8, 145, 178, 0.35); /* cyan-600/35 highlight */
+            color: #ffffff;
+        }
+        /* Remove legacy IE arrow if any */
+        #contactReason::-ms-expand { display: none; }
+        
+        .accent-border {
+            position: relative;
+        }
+        
+        .accent-border::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #06b6d4, #10b981);
+            border-radius: 1px;
+        }
+
+        /* Force Donate button placement on small screens */
+        @media (max-width: 767px) {
+            #donateBtn {
+                top: auto !important;
+                right: 1rem !important; /* 16px */
+                bottom: 1.25rem !important; /* 20px */
+            }
+        }
+
+        /* Make modal content scrollable on small screens */
+        @media (max-width: 767px) {
+            [data-dialog] {
+                max-height: calc(100vh - 3rem);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+        }
+    
+    @media (max-width: 640px) {
+        .email-particle {
+            font-size: 1.5rem !important;
+        }
+        header h1 {
+            font-size: 2rem !important;
+        }
+        header p {
+            font-size: 1rem !important;
+        }
+        button {
+            min-height: 48px;
+        }
+        .container {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+            max-width: 100% !important;
+        }
+        .glass-effect-strong {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+    }
+
+
+
+
+
+    /* Custom Duration Selector Styles */
+    #durationSelect {
+        background: rgba(30, 41, 59, 0.9) !important;
+        color: white !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        backdrop-filter: blur(16px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #durationSelect:hover {
+        background: rgba(139, 92, 246, 0.2) !important;
+        border-color: rgba(139, 92, 246, 0.4) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 8px 25px rgba(139, 92, 246, 0.2);
+    }
+
+    #durationSelect:focus {
+        background: rgba(139, 92, 246, 0.3) !important;
+        border-color: rgba(139, 92, 246, 0.6) !important;
+        box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        outline: none;
+    }
+
+    #durationSelect option {
+        background: rgba(30, 41, 59, 0.95) !important;
+        color: white !important;
+        padding: 12px 16px !important;
+        font-weight: 500 !important;
+        border: none !important;
+    }
+
+    #durationSelect option:hover {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.8), rgba(168, 85, 247, 0.8)) !important;
+        color: white !important;
+    }
+
+    #durationSelect option:checked {
+        background: linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(168, 85, 247, 0.9)) !important;
+        color: white !important;
+        font-weight: 600 !important;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 640px) {
+        #durationSelect {
+            font-size: 14px !important;
+            padding: 8px 12px !important;
+        }
+        
+        #durationSelect option {
+            padding: 10px 12px !important;
+            font-size: 14px !important;
+        }
+    }
+
+    </style>
+</head>
+<body class="gradient-bg" style="margin: 0; padding: 0; width: 100%; box-sizing: border-box; overflow-y: auto;">
+    <!-- Floating Email Particles -->
+    <div class="email-particle text-6xl" style="left: 10%; animation-delay: 0s;">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="rgba(139, 92, 246, 0.2)"/>
+            <path d="L22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    <div class="email-particle text-4xl" style="left: 80%; animation-delay: 5s;">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" stroke="currentColor" stroke-width="2" fill="rgba(16, 185, 129, 0.2)"/>
+            <circle cx="12" cy="16" r="1" fill="currentColor"/>
+            <path d="M7 11V7A5 5 0 0 1 17 7V11" stroke="currentColor" stroke-width="2"/>
+        </svg>
+    </div>
+    <div class="email-particle text-5xl" style="left: 60%; animation-delay: 10s;">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" fill="rgba(6, 182, 212, 0.2)"/>
+            <path d="M22 6L12 13L2 6" stroke="currentColor" stroke-width="2"/>
+            <circle cx="18" cy="8" r="3" fill="rgba(255, 119, 198, 0.8)" stroke="white" stroke-width="1"/>
+        </svg>
+    </div>
+    <div class="email-particle text-3xl" style="left: 30%; animation-delay: 7s;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 22S8 18 8 13A4 4 0 0 1 16 13C16 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" fill="rgba(168, 85, 247, 0.2)"/>
+            <circle cx="12" cy="13" r="1" fill="currentColor"/>
+            <path d="M12 1V5M12 19V23M4.22 4.22L6.36 6.36M17.64 17.64L19.78 19.78M1 12H5M19 12H23M4.22 19.78L6.36 17.64M17.64 6.36L19.78 4.22" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+    </div>
+    
+    <div class="container mx-auto px-4 py-8 max-w-full lg:max-w-6xl relative z-10" style="width: 100%; box-sizing: border-box;">
+        <!-- Header -->
+        <header class="text-center mb-16 fade-in">
+            <div class="flex items-center justify-center mb-8">
+                <div class="bg-white/10 p-5 rounded-3xl mr-6 float-animation border border-white/20">
+                    <svg class="w-14 h-14 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-6xl md:text-7xl font-black text-white mb-3 tracking-tight">
+                        <span class="text-gradient">Onetimemail</span>
+                    </h1>
+                    <p class="text-xl md:text-2xl text-slate-200 font-light italic">nunca uses tu correo real</p>
+                </div>
+            </div>
+            
+            <div class="max-w-3xl mx-auto">
+                <p class="text-xl md:text-2xl text-white/90 leading-relaxed font-medium">
+                    Protege tu privacidad con emails temporales que se autodestruyen en 
+                    <span class="font-bold text-amber-300 accent-border">1 minuto</span>
+                </p>
+            </div>
+            
+            <!-- Security Features -->
+            <div class="flex flex-wrap justify-center gap-4 mt-10">
+                <div class="flex items-center modern-card px-5 py-3 rounded-2xl">
+                    <span class="text-emerald-400 mr-3 text-lg">🔒</span>
+                    <span class="text-white text-sm font-semibold">100% Anónimo</span>
+                </div>
+                <div class="flex items-center modern-card px-5 py-3 rounded-2xl">
+                    <span class="text-cyan-400 mr-3 text-lg">⚡</span>
+                    <span class="text-white text-sm font-semibold">Instantáneo</span>
+                </div>
+                <div class="flex items-center modern-card px-5 py-3 rounded-2xl">
+                    <span class="text-rose-400 mr-3 text-lg">🗑️</span>
+                    <span class="text-white text-sm font-semibold">Auto-destrucción</span>
+                </div>
+            </div>
+        </header>
+
+
+
+
+        <!-- Main Card -->
+        <div class="glass-effect-strong rounded-3xl p-8 md:p-10 mb-8 fade-in">
+            <!-- Loading State -->
+            <div id="loading" class="text-center">
+                <div class="relative mb-8">
+                    <div class="inline-block animate-spin rounded-full h-16 w-16 border-4 border-white/20 border-t-white"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                    </div>
+                </div>
+                <p class="text-white text-lg font-semibold">Generando tu email temporal seguro...</p>
+                <p class="text-white/70 text-sm mt-2">Conectando con servidores encriptados</p>
+            </div>
+
+            <!-- Email Display -->
+            <div id="emailDisplay" class="hidden">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-emerald-400 to-cyan-500 rounded-full mb-6 bounce-soft shadow-2xl">
+                        <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                        </svg>
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-3">¡Email Generado!</h2>
+                    <p class="text-white/80 mb-8 text-lg">Tu dirección temporal está lista para usar</p>
+                    
+                    <div class="bg-gradient-to-r from-white/15 to-white/8 rounded-2xl p-6 mb-8 border border-white/20 shadow-xl" style="word-wrap: break-word; overflow-wrap: break-word;">
+                        <p id="emailAddress" class="text-xl md:text-2xl font-mono text-white break-all font-bold" style="word-break: break-all; overflow-wrap: anywhere;"></p>
+                    </div>
+                    
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button id="copyBtn" class="btn-primary text-white px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 min-w-[200px]">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+                            </svg>
+                            Copiar Email
+                        </button>
+                        <button id="testBtn" class="btn-secondary text-white px-8 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 min-w-[200px]">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                            </svg>
+                            Enviar Test
+                        </button>
+                    </div>
+                </div>
+
+                </div>
+
+
+                <!-- Status Grid -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <!-- Status -->
+                    <div class="modern-card rounded-2xl p-6 text-center hover:scale-105 transition-transform duration-300">
+                        <div class="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                        </div>
+                        <h3 class="text-white font-bold mb-2 text-sm uppercase tracking-wide">Estado</h3>
+                        <p id="statusText" class="text-emerald-300 font-bold status-indicator text-base">Activo</p>
+                        <div id="debugInfo" class="mt-3 text-xs text-white/60 space-y-2">
+                            <p>Token: <span id="tokenStatus" class="font-semibold">Verificando...</span></p>
+                            <p>Última verificación: <span id="lastCheck" class="font-semibold">Nunca</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Timer -->
+                    <div class="modern-card rounded-2xl p-6 text-center hover:scale-105 transition-transform duration-300">
+                        <div class="w-12 h-12 bg-amber-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-amber-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M15,1H9V3H15M11,14H13V8H11M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold mb-2 text-sm uppercase tracking-wide">Tiempo Restante</h3>
+                        <p id="timer" class="text-3xl font-black text-white mb-3"></p>
+                        
+                        <!-- Duration Selector -->
+                        <div class="relative inline-block">
+                            <select id="durationSelect" class="text-sm rounded-lg px-4 py-2 font-medium cursor-pointer">
+                                <option value="60">1 minuto</option>
+                                <option value="300">5 minutos</option>
+                                <option value="600">10 minutos</option>
+                                <option value="3600">1 hora</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Security -->
+                    <div class="modern-card rounded-2xl p-6 text-center hover:scale-105 transition-transform duration-300">
+                        <div class="w-12 h-12 bg-cyan-500/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-6 h-6 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M10,17L6,13L7.41,11.59L10,14.17L16.59,7.58L18,9L10,17Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-white font-bold mb-2 text-sm uppercase tracking-wide">Seguridad</h3>
+                        <p class="text-cyan-300 font-bold text-base">Protegido</p>
+                        <p class="text-white/60 text-xs mt-2">Encriptación SSL</p>
+                    </div>
+                </div>
+
+            <!-- Expired State -->
+            <div id="expiredState" class="hidden text-center">
+                <div class="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-rose-400 to-orange-500 rounded-full mb-8 shadow-2xl">
+                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M15,1H9V3H15M11,14H13V8H11M19.03,7.39L20.45,5.97C20,5.46 19.55,5 19.04,4.56L17.62,6C16.07,4.74 14.12,4 12,4A9,9 0 0,0 3,13A9,9 0 0,0 12,22C17,22 21,17.97 21,13C21,10.88 20.26,8.93 19.03,7.39Z"/>
+                    </svg>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Tiempo Expirado</h2>
+                <p class="text-white/80 mb-8 text-lg">Tu email temporal se ha autodestruido por seguridad</p>
+                <button id="generateNewBtn" class="btn-success text-white px-10 py-4 rounded-2xl font-bold text-base flex items-center justify-center gap-3 mx-auto">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M17.65,6.35C16.2,4.9 14.21,4 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20C15.73,20 18.84,17.45 19.73,14H17.65C16.83,16.33 14.61,18 12,18A6,6 0 0,1 6,12A6,6 0 0,1 12,6C13.66,6 15.14,6.69 16.22,7.78L13,11H20V4L17.65,6.35Z"/>
+                    </svg>
+                    Generar Nuevo Email
+                </button>
+            </div>
+        </div>
+
+        <!-- Modal: FAQ -->
+        <div id="faqModal" class="fixed inset-0 z-50 hidden">
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="faqTitle" tabindex="-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <h2 id="faqTitle" class="text-2xl font-extrabold text-white">FAQ (Preguntas Frecuentes)</h2>
+                        <button id="closeFAQ" class="text-white/60 hover:text-white" aria-label="Cerrar">✕</button>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="modern-card rounded-2xl p-4" data-accordion>
+                            <button class="w-full flex items-center justify-between text-left text-white/90 font-semibold" data-acc-btn>
+                                <span>¿Qué es un correo electrónico temporal?</span>
+                                <svg class="w-5 h-5 text-white/70 transition-transform duration-300" data-acc-icon viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            </button>
+                            <div class="mt-3 text-white/70 text-sm hidden" data-acc-content>
+                                Es una dirección desechable, generada al instante, que te permite recibir correos durante un tiempo limitado sin necesidad de registro.
+                            </div>
+                        </div>
+                        <div class="modern-card rounded-2xl p-4" data-accordion>
+                            <button class="w-full flex items-center justify-between text-left text-white/90 font-semibold" data-acc-btn>
+                                <span>¿Por qué usar un correo temporal?</span>
+                                <svg class="w-5 h-5 text-white/70 transition-transform duration-300" data-acc-icon viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            </button>
+                            <div class="mt-3 text-white/70 text-sm hidden" data-acc-content>
+                                Para proteger tu privacidad, evitar spam y evitar compartir tu correo personal en sitios poco confiables.
+                            </div>
+                        </div>
+                        <div class="modern-card rounded-2xl p-4" data-accordion>
+                            <button class="w-full flex items-center justify-between text-left text-white/90 font-semibold" data-acc-btn>
+                                <span>¿Es necesario registrarse?</span>
+                                <svg class="w-5 h-5 text-white/70 transition-transform duration-300" data-acc-icon viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            </button>
+                            <div class="mt-3 text-white/70 text-sm hidden" data-acc-content>
+                                No. No requieres crear cuenta ni proporcionar datos personales.
+                            </div>
+                        </div>
+                        <div class="modern-card rounded-2xl p-4" data-accordion>
+                            <button class="w-full flex items-center justify-between text-left text-white/90 font-semibold" data-acc-btn>
+                                <span>¿Puedo enviar correos desde este servicio?</span>
+                                <svg class="w-5 h-5 text-white/70 transition-transform duration-300" data-acc-icon viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            </button>
+                            <div class="mt-3 text-white/70 text-sm hidden" data-acc-content>
+                                No. Solo puedes recibir correos; el envío está deshabilitado para proteger contra abusos.
+                            </div>
+                        </div>
+                        <div class="modern-card rounded-2xl p-4" data-accordion>
+                            <button class="w-full flex items-center justify-between text-left text-white/90 font-semibold" data-acc-btn>
+                                <span>¿Cuánto tiempo duran los correos?</span>
+                                <svg class="w-5 h-5 text-white/70 transition-transform duration-300" data-acc-icon viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            </button>
+                            <div class="mt-3 text-white/70 text-sm hidden" data-acc-content>
+                                Los mensajes se eliminan automáticamente después del periodo de validez configurado (ej. 1 hora).
+                            </div>
+                        </div>
+                        <div class="modern-card rounded-2xl p-4" data-accordion>
+                            <button class="w-full flex items-center justify-between text-left text-white/90 font-semibold" data-acc-btn>
+                                <span>¿Es seguro?</span>
+                                <svg class="w-5 h-5 text-white/70 transition-transform duration-300" data-acc-icon viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.24 4.24a.75.75 0 01-1.06 0L5.21 8.29a.75.75 0 01.02-1.08z" clip-rule="evenodd"/></svg>
+                            </button>
+                            <div class="mt-3 text-white/70 text-sm hidden" data-acc-content>
+                                Sí, es seguro siempre que no recibas datos sensibles. Cualquier persona con acceso al mismo buzón podría verlo si no lo eliminas.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right mt-4">
+                        <button id="closeFAQ2" class="btn-secondary text-white px-5 py-2 rounded-xl font-semibold">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal: Contacto -->
+        <div id="contactModal" class="fixed inset-0 z-50 hidden">
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="contactTitle" tabindex="-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <h2 id="contactTitle" class="text-2xl font-extrabold text-white">Contáctanos</h2>
+                        <button id="closeContact" class="text-white/60 hover:text-white" aria-label="Cerrar">✕</button>
+                    </div>
+                    <p class="text-white/70 text-sm mb-6">Si tienes dudas, sugerencias o reportes, completa el formulario. Te responderemos lo antes posible.</p>
+                    <form id="contactForm" class="space-y-4">
+                        <!-- Honeypot anti-spam: no llenar este campo -->
+                        <div class="hidden" aria-hidden="true">
+                            <label for="contactCompany">Company</label>
+                            <input id="contactCompany" name="botcheck" type="text" tabindex="-1" autocomplete="off">
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm text-white/70 mb-1" for="contactName">Nombre (opcional)</label>
+                                <input id="contactName" name="name" type="text" class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Tu nombre">
+                            </div>
+                            <div>
+                                <label class="block text-sm text-white/70 mb-1" for="contactEmail">Correo electrónico *</label>
+                                <input id="contactEmail" name="email" type="email" required class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="tu@correo.com">
+                            </div>
+                        </div>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm text-white/70 mb-1" for="contactReason">Razón *</label>
+                                <select id="contactReason" name="reason" required class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+                                    <option value="" disabled selected>Selecciona una razón</option>
+                                    <option>Consulta general</option>
+                                    <option>Reporte de abuso</option>
+                                    <option>Reporte de bug</option>
+                                    <option>Sugerencia / feedback</option>
+                                    <option>Otro</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm text-white/70 mb-1" for="contactMessage">Mensaje *</label>
+                                <textarea id="contactMessage" name="message" required rows="3" class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Escribe tu mensaje"></textarea>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-end gap-3 pt-2">
+                            <button id="closeContact2" type="button" class="btn-secondary text-white px-5 py-2 rounded-xl font-semibold">Cerrar</button>
+                            <button type="submit" class="btn-success text-white px-6 py-2 rounded-xl font-semibold">Enviar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Messages Section -->
+        <div id="messagesSection" class="glass-effect-strong rounded-3xl p-8 md:p-10 hidden fade-in">
+            <div class="flex items-center justify-between mb-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-violet-400 to-pink-500 rounded-2xl flex items-center justify-center shadow-lg">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 6L10 15L4 9"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl md:text-3xl font-bold text-white">Bandeja de Entrada</h3>
+                        <p class="text-white/70 text-base">Mensajes recibidos en tiempo real</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="w-3 h-3 bg-emerald-400 rounded-full animate-pulse"></div>
+                    <span id="messageCount" class="bg-gradient-to-r from-violet-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-bold shadow-lg">0</span>
+                </div>
+            </div>
+            
+            <div id="noMessages" class="text-center py-16">
+                <div class="w-24 h-24 bg-white/10 rounded-3xl flex items-center justify-center mx-auto mb-6 pulse-soft border border-white/20">
+                    <svg class="w-12 h-12 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                </div>
+                <h4 class="text-xl font-bold text-white mb-3">Esperando mensajes...</h4>
+                <p class="text-white/70 max-w-lg mx-auto text-base leading-relaxed">Los nuevos correos aparecerán aquí automáticamente. Usa tu email temporal para registrarte en servicios sin comprometer tu privacidad.</p>
+                
+                <!-- Tips -->
+                <div class="grid md:grid-cols-3 gap-4 mt-8 max-w-2xl mx-auto">
+                    <div class="modern-card rounded-2xl p-4 hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl mb-2">🚀</div>
+                        <p class="text-white/80 text-sm font-medium">Instantáneo</p>
+                    </div>
+                    <div class="modern-card rounded-2xl p-4 hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl mb-2">🔒</div>
+                        <p class="text-white/80 text-sm font-medium">Privado</p>
+                    </div>
+                    <div class="modern-card rounded-2xl p-4 hover:scale-105 transition-transform duration-300">
+                        <div class="text-2xl mb-2">⏰</div>
+                        <p class="text-white/80 text-sm font-medium">Temporal</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="messagesList" class="space-y-5"></div>
+        </div>
+
+        <!-- Donate Button (PayPal) -->
+        <a id="donateBtn" href="https://paypal.me/CastilloDuran2512" target="_blank" rel="noopener"
+           class="fixed top-auto bottom-5 right-4 lg:top-6 lg:right-10 lg:bottom-auto z-40 glass-effect rounded-2xl px-4 py-2 border border-white/20 text-white/90 hover:text-white transition transform hover:scale-105 flex items-center gap-2 shadow-lg">
+            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M13.2 3c3.7 0 6.3 1.8 6 5-.2 2.2-1.6 3.6-3.7 4.2.9.4 1.5 1.3 1.4 2.6-.2 2.3-2 3.8-4.7 3.8H8.2c-.4 0-.7-.3-.6-.7l.7-4.3c0-.3.3-.5.6-.5h2.4c1.1 0 1.9-.7 2-1.6.1-.9-.5-1.6-1.6-1.6H9.1c-.4 0-.7-.3-.6-.7l.7-4.3c0-.3.3-.5.6-.5h3.4Z"/>
+            </svg>
+            <span class="font-semibold text-sm">Donar</span>
+        </a>
+
+        <!-- Toast Notification -->
+        <div id="toast" class="fixed top-6 right-6 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-8 py-5 rounded-2xl shadow-2xl transform translate-x-full transition-all duration-500 z-50 border border-white/20 backdrop-blur-lg">
+            <div class="flex items-center gap-4">
+                <svg class="w-6 h-6 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
+                </svg>
+                <span id="toastMessage" class="font-semibold text-base"></span>
+            </div>
+        </div>
+
+        <!-- Modals: Términos y Privacidad -->
+        <div id="termsModal" class="fixed inset-0 z-50 hidden">
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <h2 id="termsTitle" class="text-2xl font-extrabold text-white">Términos de Servicio</h2>
+                        <button id="closeTerms" class="text-white/60 hover:text-white" aria-label="Cerrar">
+                            ✕
+                        </button>
+                    </div>
+                    <p class="mb-6">Bienvenido a <strong class="text-white">Onetimemail</strong>, un servicio gratuito de correo electrónico temporal. Al utilizar nuestros servicios, aceptas los siguientes términos:</p>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">1. Naturaleza del servicio</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Ofrecemos correos temporales que solo permiten recibir mensajes.</li>
+                            <li>No garantizamos disponibilidad continua, integridad o restauración de correos o buzones.</li>
+                            <li>Puedes generar y eliminar buzones en cualquier momento; no almacenamos datos una vez vencidos o eliminados.</li>
+                        </ul>
+                    </section>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">2. Prohibiciones</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Está prohibido usar el servicio para fines ilegales.</li>
+                            <li>No permitimos recibir correos con información sensible, confidencial o privada.</li>
+                        </ul>
+                    </section>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">3. Limitaciones de responsabilidad</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>No nos hacemos responsables por pérdida de datos, daños por contenido recibido, ni por fallas del sistema.</li>
+                            <li>No garantizamos retención permanente de correos: los mensajes se eliminan automáticamente tras un periodo definido.</li>
+                        </ul>
+                    </section>
+                    <div class="text-right">
+                        <button id="closeTerms2" class="btn-secondary text-white px-5 py-2 rounded-xl font-semibold">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="privacyModal" class="fixed inset-0 z-50 hidden">
+            <div class="absolute inset-0 bg-black/70"></div>
+            <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="privacyTitle" tabindex="-1">
+                    <div class="flex items-start justify-between mb-4">
+                        <h2 id="privacyTitle" class="text-2xl font-extrabold text-white">Política de Privacidad</h2>
+                        <button id="closePrivacy" class="text-white/60 hover:text-white" aria-label="Cerrar">
+                            ✕
+                        </button>
+                    </div>
+                    <p class="mb-6">En <strong class="text-white">Onetimemail</strong> privilegiamos tu privacidad. Esta política describe nuestro compromiso:</p>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">1. No recolectamos datos personales</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>No solicitamos ni almacenamos direcciones de correo personales, IPs, datos de navegación o cualquier identificador.</li>
+                            <li>Tu actividad es completamente anónima.</li>
+                        </ul>
+                    </section>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">2. Retención de datos</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Los correos temporales y sus contenidos se eliminan automáticamente al finalizar su periodo de validez.</li>
+                            <li>No conservamos historial ni registros de buzones eliminados.</li>
+                        </ul>
+                    </section>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">3. Cookies</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Usamos únicamente cookies técnicas necesarias para el funcionamiento del sitio.</li>
+                            <li>No empleamos cookies de seguimiento o publicidad.</li>
+                        </ul>
+                    </section>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">4. Uso de la información</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Solo procesamos el buzón temporal activo para entregarte el servicio.</li>
+                            <li>No compartimos información con terceros, ya que no recolectamos datos identificables.</li>
+                        </ul>
+                    </section>
+                    <section class="mb-6">
+                        <h3 class="text-lg font-bold text-white mb-2">5. Actualizaciones de la política</h3>
+                        <ul class="list-disc pl-6 space-y-2">
+                            <li>Podemos modificar esta política en cualquier momento; la fecha de última actualización se reflejará en esta página.</li>
+                        </ul>
+                    </section>
+                    <div class="text-right">
+                        <button id="closePrivacy2" class="btn-secondary text-white px-5 py-2 rounded-xl font-semibold">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        
+
+        <!-- Footer -->
+        <footer class="text-center mt-16 pb-8">
+            <div class="glass-effect rounded-2xl p-6 max-w-2xl mx-auto">
+                <p class="text-white/80 text-base mb-4 font-medium">
+                    <strong class="text-gradient">Onetimemail</strong> - Protege tu privacidad digital
+                </p>
+                <p class="text-white/70 text-sm mb-4 leading-relaxed">
+                    Un correo temporal es una dirección de email desechable que protege tu privacidad y evita spam.
+                </p>
+                <div class="flex flex-wrap justify-center gap-5 text-white/60 text-sm">
+                    <span class="flex items-center gap-2"><span class="w-2 h-2 bg-emerald-400 rounded-full"></span>Sin registro</span>
+                    <span class="flex items-center gap-2"><span class="w-2 h-2 bg-cyan-400 rounded-full"></span>Instantáneo</span>
+                    <span class="flex items-center gap-2"><span class="w-2 h-2 bg-rose-400 rounded-full"></span>Auto-destrucción</span>
+                    <span class="flex items-center gap-2"><span class="w-2 h-2 bg-violet-400 rounded-full"></span>Anónimo</span>
+                </div>
+                <div class="mt-6 flex items-center justify-center gap-3 text-sm">
+                    <button id="openTerms" class="text-white/60 hover:text-white underline decoration-white/20 hover:decoration-white transition">Términos de Servicio</button>
+                    <span class="text-white/30">•</span>
+                    <button id="openPrivacy" class="text-white/60 hover:text-white underline decoration-white/20 hover:decoration-white transition">Política de Privacidad</button>
+                    <span class="text-white/30">•</span>
+                    <button id="openFAQ" class="text-white/60 hover:text-white underline decoration-white/20 hover:decoration-white transition">FAQ</button>
+                    <span class="text-white/30">•</span>
+                    <button id="openContact" class="text-white/60 hover:text-white underline decoration-white/20 hover:decoration-white transition">Contacto</button>
+                </div>
+            </div>
+        </footer>
+        </div>
+    </div>
+
+    <!-- Modal Controller Script (isolated) -->
+    <script>
+        (function() {
+            function bindModal(openBtnId, modalId, closeIds) {
+                const openBtn = document.getElementById(openBtnId);
+                const modal = document.getElementById(modalId);
+                if (!openBtn || !modal) return;
+                const dialog = modal.querySelector('[data-dialog]');
+                const overlay = modal.querySelector('.absolute.inset-0');
+                const closes = closeIds.map(id => document.getElementById(id)).filter(Boolean);
+
+                let lastFocused = null;
+
+                function getFocusable() {
+                    if (!dialog) return [];
+                    return Array.from(dialog.querySelectorAll('a[href], button, textarea, input, select, [tabindex]:not([tabindex="-1"])'))
+                        .filter(el => !el.hasAttribute('disabled') && !el.getAttribute('aria-hidden'));
+                }
+
+                function open() {
+                    lastFocused = document.activeElement;
+                    modal.classList.remove('hidden');
+                    document.body.classList.add('overflow-hidden');
+                    if (dialog) {
+                        dialog.focus();
+                        const focusables = getFocusable();
+                        if (focusables.length) focusables[0].focus();
+                    }
+                }
+
+                function close() {
+                    modal.classList.add('hidden');
+                    document.body.classList.remove('overflow-hidden');
+                    if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+                }
+
+                openBtn.addEventListener('click', (e) => { e.preventDefault(); open(); });
+                if (overlay) overlay.addEventListener('click', close);
+                closes.forEach(btn => btn.addEventListener('click', close));
+                document.addEventListener('keydown', (e) => {
+                    if (!modal.classList.contains('hidden')) {
+                        if (e.key === 'Escape') close();
+                        if (e.key === 'Tab') {
+                            const focusables = getFocusable();
+                            if (focusables.length === 0) return;
+                            const first = focusables[0];
+                            const last = focusables[focusables.length - 1];
+                            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+                        }
+                    }
+                });
+            }
+
+            bindModal('openTerms', 'termsModal', ['closeTerms', 'closeTerms2']);
+            bindModal('openPrivacy', 'privacyModal', ['closePrivacy', 'closePrivacy2']);
+            bindModal('openFAQ', 'faqModal', ['closeFAQ', 'closeFAQ2']);
+            bindModal('openContact', 'contactModal', ['closeContact', 'closeContact2']);
+
+            // Contact form submission handler (Web3Forms)
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const name = (document.getElementById('contactName').value || '').trim();
+                    const email = (document.getElementById('contactEmail').value || '').trim();
+                    const reason = (document.getElementById('contactReason').value || '').trim();
+                    const message = (document.getElementById('contactMessage').value || '').trim();
+                    const botcheck = (document.getElementById('contactCompany').value || '').trim();
+
+                    // Honeypot: si está lleno, no enviar
+                    if (botcheck) {
+                        showToastGeneric('No se pudo enviar en este momento.');
+                        return;
+                    }
+
+                    // Rate limiting: cooldown 60s y máximo 5 por día
+                    const now = Date.now();
+                    const COOLDOWN_MS = 60 * 1000; // 60s
+                    const MAX_PER_DAY = 5;
+                    const lastSentRaw = localStorage.getItem('contact_last_sent_at');
+                    const dailyRaw = localStorage.getItem('contact_daily');
+                    const today = new Date().toISOString().slice(0,10);
+                    let daily = { date: today, count: 0 };
+                    try { if (dailyRaw) daily = JSON.parse(dailyRaw); } catch {}
+                    if (daily.date !== today) { daily = { date: today, count: 0 }; }
+
+                    if (lastSentRaw) {
+                        const last = parseInt(lastSentRaw, 10) || 0;
+                        const remaining = COOLDOWN_MS - (now - last);
+                        if (remaining > 0) {
+                            const sec = Math.ceil(remaining / 1000);
+                            showToastGeneric(`Espera ${sec}s antes de enviar otro mensaje.`);
+                            return;
+                        }
+                    }
+
+                    if (daily.count >= MAX_PER_DAY) {
+                        showToastGeneric('Has alcanzado el límite diario de 5 envíos. Intenta mañana.');
+                        return;
+                    }
+
+                    if (!email || !reason || !message) {
+                        showToastGeneric('Por favor completa los campos obligatorios.');
+                        return;
+                    }
+
+                    const payload = {
+                        access_key: '17f64323-7de8-46aa-a791-31287ceb7299',
+                        subject: `Contacto - ${reason}`,
+                        from_name: name || 'Usuario',
+                        email,
+                        message,
+                        reason,
+                        to: 'chunior01@gmail.com',
+                        botcheck: ''
+                    };
+
+                    // Disable submit button during request
+                    const submitBtn = contactForm.querySelector('button[type="submit"]');
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.classList.add('opacity-70','cursor-not-allowed');
+                    }
+
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(async (res) => {
+                        const data = await res.json().catch(() => ({}));
+                        if (!res.ok || data?.success === false) {
+                            throw new Error(data?.message || `Error ${res.status}`);
+                        }
+                        // Success
+                        showToastGeneric('Mensaje enviado. ¡Gracias por contactarnos!');
+                        contactForm.reset();
+                        const modal = document.getElementById('contactModal');
+                        if (modal) modal.classList.add('hidden');
+                        // Update rate limiting state
+                        localStorage.setItem('contact_last_sent_at', String(now));
+                        daily.count += 1;
+                        localStorage.setItem('contact_daily', JSON.stringify(daily));
+                    })
+                    .catch((err) => {
+                        console.error('Web3Forms error:', err);
+                        showToastGeneric('No se pudo enviar. Intenta nuevamente en unos minutos.');
+                    })
+                    .finally(() => {
+                        if (submitBtn) {
+                            submitBtn.disabled = false;
+                            submitBtn.classList.remove('opacity-70','cursor-not-allowed');
+                        }
+                    });
+                });
+            }
+
+            // Minimal toast using existing #toast element
+            function showToastGeneric(msg){
+                const toast = document.getElementById('toast');
+                const msgSpan = document.getElementById('toastMessage');
+                if (!toast || !msgSpan) return;
+                msgSpan.textContent = msg;
+                toast.classList.remove('translate-x-full');
+                setTimeout(() => {
+                    toast.classList.add('translate-x-full');
+                }, 2200);
+            }
+        })();
+    </script>
+
+    <!-- FAQ Accordion Script (isolated) -->
+    <script>
+        (function(){
+            const accordions = document.querySelectorAll('[data-accordion]');
+            let accId = 0;
+            accordions.forEach(acc => {
+                const btn = acc.querySelector('[data-acc-btn]');
+                const content = acc.querySelector('[data-acc-content]');
+                const icon = acc.querySelector('[data-acc-icon]');
+                if (!btn || !content) return;
+                const id = content.id || `acc-content-${++accId}`;
+                content.id = id;
+                btn.setAttribute('aria-controls', id);
+                const isOpen = !content.classList.contains('hidden');
+                btn.setAttribute('aria-expanded', String(isOpen));
+                content.setAttribute('aria-hidden', String(!isOpen));
+
+                btn.addEventListener('click', () => {
+                    const nowOpen = content.classList.toggle('hidden') === false; // hidden removed => open
+                    btn.setAttribute('aria-expanded', String(nowOpen));
+                    content.setAttribute('aria-hidden', String(!nowOpen));
+                    if (icon) icon.classList.toggle('rotate-180', nowOpen);
+                });
+            });
+        })();
+    </script>
+
+    <script>
+        class TemporaryEmail {
+            constructor() {
+                this.apiBase = 'https://api.mail.tm';
+                this.email = null;
+                this.token = null;
+                this.accountId = null;
+                this.timeLeft = 60; // 1 minute in seconds
+                this.timer = null;
+                this.messageChecker = null;
+                this.messages = new Set();
+                this.isDemo = false;
+                this.isExpired = false;
+                this.demoScheduled = false;
+                this.demoTimeouts = [];
+                
+                this.init();
+            }
+
+            async init() {
+                try {
+                    // First check if API is accessible
+                    await this.checkApiAvailability();
+                    await this.generateEmail();
+                    this.startTimer();
+                    this.startMessageChecking();
+                } catch (error) {
+                    console.error('Error initializing:', error);
+                    this.fallbackToDemo();
+                }
+            }
+
+            async checkApiAvailability() {
+                try {
+                    const response = await fetch(`${this.apiBase}/domains`, {
+                        method: 'GET',
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('API not accessible');
+                    }
+                    
+                    return true;
+                } catch (error) {
+                    console.error('API check failed:', error);
+                    throw error;
+                }
+            }
+
+            async generateEmail() {
+                try {
+                    // Step 1: Get available domains
+                    const domainsResponse = await fetch(`${this.apiBase}/domains`);
+                    
+                    if (!domainsResponse.ok) {
+                        throw new Error(`Failed to get domains: ${domainsResponse.status}`);
+                    }
+                    
+                    const domainsData = await domainsResponse.json();
+                    // Handle both array and hydra format
+                    const domains = domainsData['hydra:member'] || domainsData;
+                    
+                    if (!domains || domains.length === 0) {
+                        throw new Error('No domains available');
+                    }
+
+                    // Step 2: Generate random email address
+                    const randomString = this.generateRandomString(8);
+                    const selectedDomain = domains[0];
+                    this.email = `${randomString}@${selectedDomain.domain}`;
+                    
+                    console.log('Generated email address:', this.email);
+
+                    // Step 3: Create account
+                    const password = this.generateRandomString(12);
+                    const accountPayload = {
+                        address: this.email,
+                        password: password
+                    };
+
+                    const accountResponse = await fetch(`${this.apiBase}/accounts`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(accountPayload)
+                    });
+
+                    if (!accountResponse.ok) {
+                        const errorData = await accountResponse.text();
+                        console.error('Account creation error:', errorData);
+                        throw new Error(`Failed to create account: ${accountResponse.status}`);
+                    }
+
+                    const accountData = await accountResponse.json();
+                    this.accountId = accountData.id;
+                    console.log('Account created with ID:', this.accountId);
+
+                    // Step 4: Get authentication token
+                    const tokenPayload = {
+                        address: this.email,
+                        password: password
+                    };
+
+                    const tokenResponse = await fetch(`${this.apiBase}/token`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json'
+                        },
+                        body: JSON.stringify(tokenPayload)
+                    });
+
+                    if (!tokenResponse.ok) {
+                        const errorData = await tokenResponse.text();
+                        console.error('Token error:', errorData);
+                        throw new Error(`Failed to get token: ${tokenResponse.status}`);
+                    }
+
+                    const tokenData = await tokenResponse.json();
+                    this.token = tokenData.token;
+                    console.log('Authentication token obtained');
+
+                    // Update debug info
+                    document.getElementById('tokenStatus').textContent = 'Válido';
+                    
+                    this.displayEmail();
+                    
+                } catch (error) {
+                    console.error('Error in generateEmail:', error);
+                    throw error;
+                }
+            }
+
+            generateRandomString(length) {
+                const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+                let result = '';
+                for (let i = 0; i < length; i++) {
+                    result += chars.charAt(Math.floor(Math.random() * chars.length));
+                }
+                return result;
+            }
+
+
+
+
+
+
+
+            fallbackToDemo() {
+                console.log('Falling back to demo mode due to CORS or API issues');
+                if (this.demoScheduled) {
+                    // Already scheduled demo once; avoid duplicating
+                    return;
+                }
+                this.isDemo = true;
+                
+                // Generate random demo email
+                const randomString = this.generateRandomString(8);
+                const demoEmail = `${randomString}@1secmail.com`;
+                
+                this.email = demoEmail;
+                
+                document.getElementById('loading').classList.add('hidden');
+                this.displayEmail();
+                document.getElementById('statusText').innerHTML = '🔶 Modo Demo (CORS limitado)';
+                document.getElementById('statusText').className = 'text-yellow-300 font-semibold';
+                
+                // Show demo messages
+                this.demoScheduled = true;
+                this.simulateDemoMessages();
+                this.startTimer();
+            }
+
+            displayEmail() {
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('emailDisplay').classList.remove('hidden');
+                document.getElementById('messagesSection').classList.remove('hidden');
+                
+                document.getElementById('emailAddress').textContent = this.email;
+                
+                // Copy button functionality
+                document.getElementById('copyBtn').addEventListener('click', () => {
+                    navigator.clipboard.writeText(this.email).then(() => {
+                        this.showToast('Email copiado al portapapeles');
+                    }).catch(() => {
+                        // Fallback for older browsers
+                        const textArea = document.createElement('textarea');
+                        textArea.value = this.email;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        document.execCommand('copy');
+                        document.body.removeChild(textArea);
+                        this.showToast('Email copiado al portapapeles');
+                    });
+                });
+
+                // Test button functionality
+                document.getElementById('testBtn').addEventListener('click', () => {
+                    this.sendTestEmail();
+                });
+
+                // Duration selector functionality
+                const durationSelect = document.getElementById('durationSelect');
+                durationSelect.addEventListener('change', (e) => {
+                    const newDuration = parseInt(e.target.value);
+                    this.changeDuration(newDuration);
+                });
+
+
+            }
+
+            startTimer() {
+                this.updateTimerDisplay();
+                this.timer = setInterval(() => {
+                    this.timeLeft--;
+                    this.updateTimerDisplay();
+                    
+                    if (this.timeLeft <= 0) {
+                        this.expireEmail();
+                    }
+                }, 1000);
+            }
+
+            updateTimerDisplay() {
+                const minutes = Math.floor(this.timeLeft / 60);
+                const seconds = this.timeLeft % 60;
+                const timerElement = document.getElementById('timer');
+                if (timerElement) {
+                    timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                }
+            }
+
+            changeDuration(newDuration) {
+                // Check if email is expired
+                if (this.isExpired) {
+                    this.showToast('⚠️ Genere un nuevo correo para cambiar la duración', 'warning');
+                    // Reset selector to previous value
+                    const durationSelect = document.getElementById('durationSelect');
+                    if (durationSelect) {
+                        durationSelect.value = this.timeLeft;
+                    }
+                    return;
+                }
+                
+                // Clear existing timer
+                if (this.timer) {
+                    clearInterval(this.timer);
+                }
+                
+                // Update time left
+                this.timeLeft = newDuration;
+                
+                // Restart timer with new duration
+                this.startTimer();
+                
+                // Show notification
+                const durationText = newDuration === 60 ? '1 minuto' :
+                                   newDuration === 300 ? '5 minutos' : 
+                                   newDuration === 600 ? '10 minutos' : '1 hora';
+                this.showToast(`Duración cambiada a ${durationText}`);
+            }
+
+
+
+
+
+            expireEmail() {
+                this.isExpired = true;
+                clearInterval(this.timer);
+                clearInterval(this.messageChecker);
+                // Clear any pending demo timeouts to avoid late injections
+                if (this.demoTimeouts && this.demoTimeouts.length) {
+                    this.demoTimeouts.forEach(clearTimeout);
+                    this.demoTimeouts = [];
+                }
+                
+                document.getElementById('emailDisplay').classList.add('hidden');
+                document.getElementById('messagesSection').classList.add('hidden');
+                document.getElementById('expiredState').classList.remove('hidden');
+                
+                // Disable duration selector
+                const durationSelect = document.getElementById('durationSelect');
+                if (durationSelect) {
+                    durationSelect.disabled = true;
+                    durationSelect.style.opacity = '0.5';
+                    durationSelect.style.cursor = 'not-allowed';
+                }
+                
+                // Generate new button functionality
+                const generateNewBtn = document.getElementById('generateNewBtn');
+                generateNewBtn.onclick = () => {
+                    this.resetApp();
+                };
+            }
+
+            resetApp() {
+                this.email = null;
+                this.token = null;
+                this.accountId = null;
+                this.timeLeft = 60;
+                this.messages.clear();
+                this.isDemo = false;
+                this.isExpired = false;
+                // Clear any pending demo timeouts and reset flag
+                if (this.demoTimeouts && this.demoTimeouts.length) {
+                    this.demoTimeouts.forEach(clearTimeout);
+                    this.demoTimeouts = [];
+                }
+                this.demoScheduled = false;
+                
+                document.getElementById('expiredState').classList.add('hidden');
+                document.getElementById('loading').classList.remove('hidden');
+                document.getElementById('messagesList').innerHTML = '';
+                document.getElementById('messageCount').textContent = '0';
+                document.getElementById('noMessages').classList.remove('hidden');
+                document.getElementById('statusText').innerHTML = '✅ Activo';
+                document.getElementById('statusText').className = 'text-green-300 font-semibold';
+                
+                // Reset and enable duration selector
+                const durationSelect = document.getElementById('durationSelect');
+                if (durationSelect) {
+                    durationSelect.value = '60';
+                    durationSelect.disabled = false;
+                    durationSelect.style.opacity = '1';
+                    durationSelect.style.cursor = 'pointer';
+                }
+                
+                this.init();
+            }
+
+            async startMessageChecking() {
+                if (this.isDemo) return;
+                
+                console.log('Starting message checking with token:', this.token ? 'Present' : 'Missing');
+                
+                // Initial check
+                await this.checkMessages();
+                
+                this.messageChecker = setInterval(async () => {
+                    await this.checkMessages();
+                }, 5000); // Check every 5 seconds
+            }
+
+            async checkMessages() {
+                if (this.isDemo) {
+                    console.log('Skipping message check - demo mode');
+                    return;
+                }
+
+                try {
+                    console.log('Checking for new messages...');
+                    
+                    const messages = await this.checkMailTmMessages();
+                    console.log(`Found ${messages.length} total messages`);
+
+                    // Process new messages
+                    let newMessageCount = 0;
+                    for (const message of messages) {
+                        const messageId = message.id || `${message.from}_${message.date}_${message.subject}`;
+                        if (!this.messages.has(messageId)) {
+                            console.log('New message found:', messageId, message.subject);
+                            this.messages.add(messageId);
+                            await this.displayMessage(message);
+                            newMessageCount++;
+                        }
+                    }
+                    
+                    if (newMessageCount === 0) {
+                        console.log('No new messages');
+                    }
+                    
+                    // Update last check time
+                    document.getElementById('lastCheck').textContent = new Date().toLocaleTimeString('es-ES');
+                    
+                } catch (error) {
+                    console.error('Error checking messages:', error);
+                    
+                    // If it's a network error, don't stop checking
+                    if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                        console.log('Network error, will retry...');
+                    }
+                }
+            }
+
+            async checkMailTmMessages() {
+                if (!this.token) {
+                    console.log('No token available for mail.tm');
+                    return [];
+                }
+
+                const response = await fetch(`${this.apiBase}/messages`, {
+                    method: 'GET',
+                    headers: {
+                        'Authorization': `Bearer ${this.token}`,
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to fetch mail.tm messages:', response.status, response.statusText);
+                    
+                    // If unauthorized, token might be expired
+                    if (response.status === 401) {
+                        console.log('Token expired, stopping message checks');
+                        clearInterval(this.messageChecker);
+                    }
+                    return [];
+                }
+
+                const data = await response.json();
+                console.log('Mail.tm messages response:', data);
+                
+                // Handle different response formats
+                let messages = [];
+                if (data['hydra:member']) {
+                    messages = data['hydra:member'];
+                } else if (Array.isArray(data)) {
+                    messages = data;
+                } else if (data.messages) {
+                    messages = data.messages;
+                }
+
+                return messages;
+            }
+
+
+
+            async displayMessage(message) {
+                try {
+                    let fullMessage = message;
+                    
+                    // For mail.tm, fetch full content if needed
+                    if (!message.text && !message.html) {
+                        const response = await fetch(`${this.apiBase}/messages/${message.id}`, {
+                            headers: {
+                                'Authorization': `Bearer ${this.token}`,
+                                'Accept': 'application/json'
+                            }
+                        });
+
+                        if (response.ok) {
+                            fullMessage = await response.json();
+                        }
+                    }
+                    
+                    this.addMessageToUI(fullMessage);
+                    this.showToast('¡Nuevo mensaje recibido!');
+                } catch (error) {
+                    console.error('Error displaying message:', error);
+                }
+            }
+
+            addMessageToUI(message) {
+                document.getElementById('noMessages').classList.add('hidden');
+                
+                const messageElement = document.createElement('div');
+                messageElement.className = 'modern-card rounded-2xl p-6 slide-in hover:scale-[1.02] transition-all duration-300';
+                
+                // Handle date format
+                let date;
+                if (message.createdAt) {
+                    date = new Date(message.createdAt).toLocaleString('es-ES');
+                } else {
+                    date = new Date().toLocaleString('es-ES');
+                }
+                
+                // Handle from format
+                let fromAddress;
+                if (message.from && message.from.address) {
+                    fromAddress = message.from.address;
+                } else {
+                    fromAddress = 'Desconocido';
+                }
+                
+                // Handle content format: prefer HTML (supports string or string[]), fallback to text/intro
+                const htmlContent = Array.isArray(message.html) ? message.html.join('') : message.html;
+                const textContent = message.text || message.intro || '';
+                
+                
+                messageElement.innerHTML = `
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-400 to-violet-500 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                            <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                            </svg>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex justify-between items-start mb-3">
+                                <h4 class="font-bold text-white text-lg leading-tight">${this.escapeHtml(message.subject || 'Sin asunto')}</h4>
+                                <span class="text-white/60 text-sm flex-shrink-0 ml-4">${date}</span>
+                            </div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <svg class="w-4 h-4 text-white/60" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.9 1 3 1.9 3 3V21C3 22.1 3.9 23 5 23H19C20.1 23 21 22.1 21 21V9M12 7C14.8 7 17 9.2 17 12S14.8 17 12 17 7 14.8 7 12 9.2 7 12 7Z"/>
+                                </svg>
+                                <p class="text-white/80 text-sm font-semibold">${this.escapeHtml(fromAddress)}</p>
+                                ${this.isDemo ? '<span class="bg-gradient-to-r from-amber-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg">DEMO</span>' : ''}
+                            </div>
+                            <div class="bg-white/5 rounded-xl p-0 border border-white/10 overflow-hidden">
+                                ${htmlContent ? `
+                                <iframe
+                                    sandbox
+                                    referrerpolicy="no-referrer"
+                                    style="width:100%; height:320px; border:0; background:transparent;"
+                                    data-msg-id="${this.escapeHtml(message.id || '')}"
+                                ></iframe>
+                                ` : `
+                                <div class="p-4 max-h-40 overflow-y-auto">
+                                  <p class="text-white/90 whitespace-pre-wrap leading-relaxed text-base">${this.escapeHtml(textContent || 'Sin contenido')}</p>
+                                </div>
+                                `}
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                document.getElementById('messagesList').insertBefore(messageElement, document.getElementById('messagesList').firstChild);
+                // If HTML content exists, set it via DOM to avoid breaking markup in attributes and auto-resize iframe
+                if (htmlContent) {
+                    const iframe = messageElement.querySelector('iframe[data-msg-id]');
+                    if (iframe) {
+                        try {
+                            iframe.srcdoc = htmlContent;
+                        } catch (e) {
+                            // ignore
+                        }
+                        iframe.addEventListener('load', () => {
+                            try {
+                                const doc = iframe.contentDocument;
+                                const body = doc && doc.body;
+                                if (body) {
+                                    const h = Math.max(220, Math.min(800, body.scrollHeight || 320));
+                                    iframe.style.height = h + 'px';
+                                }
+                            } catch (e) {}
+                        });
+                    }
+                }
+                document.getElementById('messageCount').textContent = this.messages.size;
+            }
+
+            
+
+            simulateDemoMessages() {
+                const demoMessages = [
+                    {
+                        id: 'demo1',
+                        subject: "¡Bienvenido! Confirmación de registro",
+                        from: { address: "welcome@ejemplo.com" },
+                        text: "¡Gracias por registrarte en nuestro servicio!\n\nEste es un mensaje de demostración para mostrar cómo funcionaría la aplicación con la API real de mail.tm.\n\nEn un entorno real, recibirías emails reales en esta bandeja de entrada temporal.",
+                        createdAt: new Date().toISOString()
+                    },
+                    {
+                        id: 'demo2',
+                        subject: "Código de verificación: 123456",
+                        from: { address: "noreply@servicio.com" },
+                        text: "Tu código de verificación es: 123456\n\nEste código expira en 10 minutos.\n\n¡Este es otro ejemplo de cómo aparecerían los mensajes reales!",
+                        createdAt: new Date(Date.now() - 30000).toISOString()
+                    },
+                    {
+                        id: 'demo3',
+                        subject: "Newsletter semanal",
+                        from: { address: "newsletter@blog.com" },
+                        text: "¡Hola!\n\nAquí tienes las últimas noticias de esta semana...\n\nEste es un ejemplo de cómo se vería un newsletter en tu bandeja temporal.",
+                        createdAt: new Date(Date.now() - 120000).toISOString()
+                    }
+                ];
+
+                // Show messages with delays (store timeout IDs to be able to clear them)
+                const t1 = setTimeout(() => {
+                    if (!this.messages.has('demo1')) {
+                        this.messages.add('demo1');
+                        this.addMessageToUI(demoMessages[0]);
+                        this.showToast('¡Nuevo mensaje recibido! (Demo)');
+                    }
+                }, 2000);
+
+                const t2 = setTimeout(() => {
+                    if (!this.messages.has('demo2')) {
+                        this.messages.add('demo2');
+                        this.addMessageToUI(demoMessages[1]);
+                        this.showToast('¡Nuevo mensaje recibido! (Demo)');
+                    }
+                }, 5000);
+
+                const t3 = setTimeout(() => {
+                    if (!this.messages.has('demo3')) {
+                        this.messages.add('demo3');
+                        this.addMessageToUI(demoMessages[2]);
+                        this.showToast('¡Nuevo mensaje recibido! (Demo)');
+                    }
+                }, 8000);
+
+                this.demoTimeouts.push(t1, t2, t3);
+            }
+
+            escapeHtml(text) {
+                if (!text) return '';
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            sendTestEmail() {
+                if (!this.email) return;
+                
+                // Create a mailto link to open default email client
+                const subject = encodeURIComponent('Test Email - Correo Temporal');
+                const body = encodeURIComponent(`Este es un email de prueba enviado a: ${this.email}\n\nSi recibes este mensaje, la aplicación está funcionando correctamente.\n\nFecha: ${new Date().toLocaleString('es-ES')}`);
+                const mailtoLink = `mailto:${this.email}?subject=${subject}&body=${body}`;
+                
+                // Try to open email client
+                const link = document.createElement('a');
+                link.href = mailtoLink;
+                link.click();
+                
+                this.showToast('Cliente de email abierto. Envía el mensaje para probar.');
+                
+                // Force a message check in 5 seconds
+                setTimeout(() => {
+                    this.checkMessages();
+                }, 5000);
+            }
+
+            showToast(message, type = 'success') {
+                const toast = document.getElementById('toast');
+                const toastMessage = document.getElementById('toastMessage');
+                
+                // Reset toast classes
+                toast.className = 'fixed top-6 right-6 text-white px-8 py-5 rounded-2xl shadow-2xl transform translate-x-full transition-all duration-500 z-50 border border-white/20 backdrop-blur-lg';
+                
+                // Add type-specific classes
+                if (type === 'warning') {
+                    toast.classList.add('bg-gradient-to-r', 'from-amber-500', 'to-orange-600');
+                } else {
+                    toast.classList.add('bg-gradient-to-r', 'from-emerald-500', 'to-teal-600');
+                }
+                
+                toastMessage.textContent = message;
+                toast.classList.remove('translate-x-full');
+                
+                setTimeout(() => {
+                    toast.classList.add('translate-x-full');
+                }, 3000);
+            }
+        }
+
+        // Initialize the app when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            new TemporaryEmail();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96fae10e20f03d59',t:'MTc1NTI4Mzg0Mi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

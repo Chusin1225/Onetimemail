@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, follow">
+    <title>Términos de Servicio - Onetimemail</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📧</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+        html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; }
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+            background-color: #0f172a;
+            background-size: 100% 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+            position: relative;
+        }
+        .glass-effect { backdrop-filter: blur(24px); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 25px 45px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
+        .text-gradient { background: linear-gradient(135deg, #f8fafc, #e2e8f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    </style>
+</head>
+<body class="gradient-bg">
+    <div class="container mx-auto px-4 py-10 md:py-14 max-w-full lg:max-w-4xl relative z-10">
+        <header class="mb-8 md:mb-12 text-center">
+            <a href="index.html" class="inline-flex items-center text-white/70 hover:text-white text-sm mb-4">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+                Volver a inicio
+            </a>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+                <span class="text-gradient">Términos de Servicio</span>
+            </h1>
+            <p class="text-white/70 mt-2">Última actualización: agosto 2025</p>
+        </header>
+
+        <main class="glass-effect rounded-3xl p-6 md:p-10 text-white/90 leading-relaxed">
+            <p class="mb-6">
+                Bienvenido a <strong class="text-white">Onetimemail</strong>, un servicio gratuito de correo electrónico temporal. Al utilizar nuestros servicios, aceptas los siguientes términos:
+            </p>
+
+            <section class="mb-8">
+                <h2 class="text-xl font-bold text-white mb-3">1. Naturaleza del servicio</h2>
+                <ul class="list-disc pl-6 space-y-2 text-white/90">
+                    <li>Ofrecemos correos temporales que solo permiten recibir mensajes.</li>
+                    <li>No garantizamos disponibilidad continua, integridad o restauración de correos o buzones.</li>
+                    <li>Puedes generar y eliminar buzones en cualquier momento; no almacenamos datos una vez vencidos o eliminados.</li>
+                </ul>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-xl font-bold text-white mb-3">2. Prohibiciones</h2>
+                <ul class="list-disc pl-6 space-y-2 text-white/90">
+                    <li>Está prohibido usar el servicio para fines ilegales.</li>
+                    <li>No permitimos recibir correos con información sensible, confidencial o privada.</li>
+                </ul>
+            </section>
+
+            <section class="mb-8">
+                <h2 class="text-xl font-bold text-white mb-3">3. Limitaciones de responsabilidad</h2>
+                <ul class="list-disc pl-6 space-y-2 text-white/90">
+                    <li>No nos hacemos responsables por pérdida de datos, daños por contenido recibido, ni por fallas del sistema.</li>
+                    <li>No garantizamos retención permanente de correos: los mensajes se eliminan automáticamente tras un periodo definido.</li>
+                </ul>
+            </section>
+
+            <p class="text-white/70 text-sm">Si no estás de acuerdo con estos términos, por favor no utilices el servicio.</p>
+        </main>
+
+        <footer class="text-center mt-10 pb-4">
+            <p class="text-white/60 text-sm">© <span id="year"></span> Onetimemail</p>
+        </footer>
+    </div>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
