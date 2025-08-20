@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Contacto - Onetimemail. Envíanos tus dudas, sugerencias o reportes.">
+  <meta name="robots" content="index, follow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data:; img-src 'self' https: data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; script-src 'self' 'unsafe-inline' https://cdn.tailwindcss.com; connect-src 'self' https://api.web3forms.com; frame-ancestors 'self';">
+  <title>Contacto - Onetimemail</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📧</text></svg>">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; width: 100%; height: 100%; overflow-x: hidden; }
+    .gradient-bg {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 25%, #334155 50%, #475569 75%, #64748b 100%);
+      background-color: #0f172a;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      min-height: 100vh;
+      position: relative;
+    }
+    .glass-effect { backdrop-filter: blur(24px); background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12); box-shadow: 0 25px 45px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.1); }
+    .text-gradient { background: linear-gradient(135deg, #f8fafc, #e2e8f0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .btn-secondary { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    .btn-success { background: linear-gradient(135deg, #10b981, #059669); }
+  </style>
+</head>
+<body class="gradient-bg">
+  <div class="container mx-auto px-4 py-10 md:py-14 max-w-full lg:max-w-3xl relative z-10">
+    <header class="mb-8 md:mb-12 text-center">
+      <a href="index.html" class="inline-flex items-center text-white/70 hover:text-white text-sm mb-4">
+        <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg>
+        Volver a inicio
+      </a>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
+        <span class="text-gradient">Contacto</span>
+      </h1>
+      <p class="text-white/70 mt-2">Envíanos tus dudas, sugerencias o reportes</p>
+    </header>
+
+    <main class="glass-effect rounded-3xl p-6 md:p-8 text-white/90">
+      <form id="contactForm" class="space-y-4">
+        <!-- Honeypot anti-spam -->
+        <div class="hidden" aria-hidden="true">
+          <label for="contactCompany">Company</label>
+          <input id="contactCompany" name="botcheck" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm text-white/70 mb-1" for="contactName">Nombre (opcional)</label>
+            <input id="contactName" name="name" type="text" class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Tu nombre">
+          </div>
+          <div>
+            <label class="block text-sm text-white/70 mb-1" for="contactEmail">Correo electrónico *</label>
+            <input id="contactEmail" name="email" type="email" required class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="tu@correo.com">
+          </div>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-sm text-white/70 mb-1" for="contactReason">Razón *</label>
+            <select id="contactReason" name="reason" required class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500">
+              <option value="" disabled selected>Selecciona una razón</option>
+              <option>Consulta general</option>
+              <option>Reporte de abuso</option>
+              <option>Reporte de bug</option>
+              <option>Sugerencia / feedback</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-white/70 mb-1" for="contactMessage">Mensaje *</label>
+            <textarea id="contactMessage" name="message" required rows="4" class="w-full rounded-xl px-4 py-3 bg-white/10 border border-white/15 text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Escribe tu mensaje"></textarea>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <a href="index.html" class="btn-secondary text-white px-5 py-2 rounded-xl font-semibold">Cancelar</a>
+          <button type="submit" class="btn-success text-white px-6 py-2 rounded-xl font-semibold">Enviar</button>
+        </div>
+      </form>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed top-6 right-6 bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-6 py-4 rounded-2xl shadow-2xl transform translate-x-full transition-all duration-500 z-50 border border-white/20 backdrop-blur-lg">
+      <span id="toastMessage" class="font-semibold text-sm"></span>
+    </div>
+
+    <footer class="text-center mt-10 pb-4">
+      <p class="text-white/60 text-sm">© <span id="year"></span> Onetimemail</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const msgSpan = document.getElementById('toastMessage');
+      msgSpan.textContent = msg;
+      toast.classList.remove('translate-x-full');
+      setTimeout(() => toast.classList.add('translate-x-full'), 2200);
+    }
+
+    const form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = (document.getElementById('contactName').value || '').trim();
+        const email = (document.getElementById('contactEmail').value || '').trim();
+        const reason = (document.getElementById('contactReason').value || '').trim();
+        const message = (document.getElementById('contactMessage').value || '').trim();
+        const botcheck = (document.getElementById('contactCompany').value || '').trim();
+
+        if (botcheck) { showToast('No se pudo enviar en este momento.'); return; }
+        if (!email || !reason || !message) { showToast('Completa los campos obligatorios.'); return; }
+
+        const now = Date.now();
+        const COOLDOWN_MS = 60 * 1000; // 60s
+        const MAX_PER_DAY = 5;
+        const lastSentRaw = localStorage.getItem('contact_last_sent_at');
+        const dailyRaw = localStorage.getItem('contact_daily');
+        const today = new Date().toISOString().slice(0,10);
+        let daily = { date: today, count: 0 };
+        try { if (dailyRaw) daily = JSON.parse(dailyRaw); } catch {}
+        if (daily.date !== today) { daily = { date: today, count: 0 }; }
+
+        if (lastSentRaw) {
+          const last = parseInt(lastSentRaw, 10) || 0;
+          const remaining = COOLDOWN_MS - (now - last);
+          if (remaining > 0) { showToast(`Espera ${Math.ceil(remaining/1000)}s para reenviar.`); return; }
+        }
+        if (daily.count >= MAX_PER_DAY) { showToast('Límite diario alcanzado. Intenta mañana.'); return; }
+
+        const payload = {
+          access_key: '17f64323-7de8-46aa-a791-31287ceb7299',
+          subject: `Contacto - ${reason}`,
+          from_name: name || 'Usuario',
+          email,
+          message,
+          reason,
+          to: 'chunior01@gmail.com',
+          botcheck: ''
+        };
+
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) { submitBtn.disabled = true; submitBtn.classList.add('opacity-70','cursor-not-allowed'); }
+
+        fetch('https://api.web3forms.com/submit', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(async (res) => {
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok || data?.success === false) throw new Error(data?.message || `Error ${res.status}`);
+          showToast('Mensaje enviado. ¡Gracias por contactarnos!');
+          form.reset();
+          localStorage.setItem('contact_last_sent_at', String(now));
+          daily.count += 1;
+          localStorage.setItem('contact_daily', JSON.stringify(daily));
+        })
+        .catch((err) => {
+          console.error('Web3Forms error:', err);
+          showToast('No se pudo enviar. Intenta más tarde.');
+        })
+        .finally(() => {
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.classList.remove('opacity-70','cursor-not-allowed'); }
+        });
+      });
+    }
+  </script>
+</body>
+</html>
