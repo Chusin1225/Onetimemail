@@ -293,8 +293,16 @@
             }
         }
 
+        /* Modal content scrollable only on small screens (no sticky header) */
+        @media (max-width: 767px) {
+            [data-dialog] {
+                max-height: calc(100vh - 3rem);
+                overflow-y: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
         
-    
     @media (max-width: 640px) {
         .email-particle {
             font-size: 1.5rem !important;
