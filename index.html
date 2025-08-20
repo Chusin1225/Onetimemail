@@ -302,6 +302,37 @@
                 overscroll-behavior: contain;
             }
         }
+        /* Modal sticky header and safe areas */
+        [data-dialog] {
+            /* prevent content being hidden under safe area / bottom chrome */
+            padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+        }
+        .modal-header {
+            position: sticky;
+            top: 0;
+            /* stretch header to dialog padding edges */
+            margin-left: -1.5rem; /* matches p-6 */
+            margin-right: -1.5rem;
+            padding: 0.75rem 1.5rem; /* ~py-3 px-6 */
+            background: rgba(15, 23, 42, 0.7); /* slate-900/70 for contrast */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 10;
+            padding-top: calc(env(safe-area-inset-top, 0px) + 0.5rem);
+        }
+        @media (min-width: 768px) {
+            .modal-header {
+                margin-left: -2rem; /* matches md:p-8 */
+                margin-right: -2rem;
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+        .modal-close {
+            font-size: 1.5rem; /* larger touch target */
+            line-height: 1;
+            padding: 0.25rem;
+        }
     
     @media (max-width: 640px) {
         .email-particle {
@@ -584,10 +615,10 @@
         <div id="faqModal" class="fixed inset-0 z-50 hidden">
             <div class="absolute inset-0 bg-black/70"></div>
             <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
-                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="faqTitle" tabindex="-1">
-                    <div class="flex items-start justify-between mb-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90 overflow-y-auto" data-dialog role="dialog" aria-modal="true" aria-labelledby="faqTitle" tabindex="-1">
+                    <div class="modal-header flex items-start justify-between mb-4">
                         <h2 id="faqTitle" class="text-2xl font-extrabold text-white">FAQ (Preguntas Frecuentes)</h2>
-                        <button id="closeFAQ" class="text-white/60 hover:text-white" aria-label="Cerrar">✕</button>
+                        <button id="closeFAQ" class="modal-close text-white/80 hover:text-white" aria-label="Cerrar">✕</button>
                     </div>
                     <div class="space-y-3">
                         <div class="modern-card rounded-2xl p-4" data-accordion>
@@ -656,10 +687,10 @@
         <div id="contactModal" class="fixed inset-0 z-50 hidden">
             <div class="absolute inset-0 bg-black/70"></div>
             <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
-                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="contactTitle" tabindex="-1">
-                    <div class="flex items-start justify-between mb-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90 overflow-y-auto" data-dialog role="dialog" aria-modal="true" aria-labelledby="contactTitle" tabindex="-1">
+                    <div class="modal-header flex items-start justify-between mb-4">
                         <h2 id="contactTitle" class="text-2xl font-extrabold text-white">Contáctanos</h2>
-                        <button id="closeContact" class="text-white/60 hover:text-white" aria-label="Cerrar">✕</button>
+                        <button id="closeContact" class="modal-close text-white/80 hover:text-white" aria-label="Cerrar">✕</button>
                     </div>
                     <p class="text-white/70 text-sm mb-6">Si tienes dudas, sugerencias o reportes, completa el formulario. Te responderemos lo antes posible.</p>
                     <form id="contactForm" class="space-y-4">
@@ -776,10 +807,10 @@
         <div id="termsModal" class="fixed inset-0 z-50 hidden">
             <div class="absolute inset-0 bg-black/70"></div>
             <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
-                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
-                    <div class="flex items-start justify-between mb-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90 overflow-y-auto" data-dialog role="dialog" aria-modal="true" aria-labelledby="termsTitle" tabindex="-1">
+                    <div class="modal-header flex items-start justify-between mb-4">
                         <h2 id="termsTitle" class="text-2xl font-extrabold text-white">Términos de Servicio</h2>
-                        <button id="closeTerms" class="text-white/60 hover:text-white" aria-label="Cerrar">
+                        <button id="closeTerms" class="modal-close text-white/80 hover:text-white" aria-label="Cerrar">
                             ✕
                         </button>
                     </div>
@@ -816,10 +847,10 @@
         <div id="privacyModal" class="fixed inset-0 z-50 hidden">
             <div class="absolute inset-0 bg-black/70"></div>
             <div class="relative z-10 max-w-3xl mx-auto mt-10 mb-10 px-4">
-                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90" data-dialog role="dialog" aria-modal="true" aria-labelledby="privacyTitle" tabindex="-1">
-                    <div class="flex items-start justify-between mb-4">
+                <div class="glass-effect rounded-3xl p-6 md:p-8 text-white/90 overflow-y-auto" data-dialog role="dialog" aria-modal="true" aria-labelledby="privacyTitle" tabindex="-1">
+                    <div class="modal-header flex items-start justify-between mb-4">
                         <h2 id="privacyTitle" class="text-2xl font-extrabold text-white">Política de Privacidad</h2>
-                        <button id="closePrivacy" class="text-white/60 hover:text-white" aria-label="Cerrar">
+                        <button id="closePrivacy" class="modal-close text-white/80 hover:text-white" aria-label="Cerrar">
                             ✕
                         </button>
                     </div>
